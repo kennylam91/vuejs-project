@@ -5,13 +5,23 @@ import App from './App'
 import router from './router'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { store } from './store/store'
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
+  mounted () {
+    this.logStore()
+  },
+  methods: {
+    logStore () {
+      console.log(this.$store)
+    }
+  },
   template: '<App/>'
 })
