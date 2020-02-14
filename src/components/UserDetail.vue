@@ -1,11 +1,11 @@
 <template>
-  <div class="row">
+  <div class="row" v-if="user">
     <div class="col-3 id=" id="userInfo">
       <div class="shadow-lg bg-white rounded" style>
         <header class="p-3 border-bottom text-center">
           <span>About me</span>
         </header>
-        <div class="p-3" v-if="user">
+        <div class="p-3">
           <div class="text-center">
             <img
               class="img-fluid d-inline-block mb-3 avatar"

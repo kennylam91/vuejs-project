@@ -16,11 +16,14 @@
         <span class="font-weight-bold mb-2 d-block" v-text="post.title"></span>
         <span class="post" v-text="post.body"></span>
         <hr class="m-2"/>
-        <div class="px-3 mb-3">
-          <button class="btn btn-outline-info btn-sm border-0" type="button">Like</button>
-          <button class="btn btn-outline-danger btn-sm border-0" type="button" @click="showComments">Comments</button>
+        <div class="d-flex justify-content-between">
+          <div class="px-4 mb-3">
+            <button class="btn btn-outline-info btn-sm border-0" type="button">Like</button>
+            <button class="btn btn-outline-danger btn-sm border-0" type="button" @click="showComments">Comments</button>
+          </div>
+          <span v-if="isCommentsShow" class="comment-number px-4">{{commentNumber}} comments</span>
         </div>
-        <comments v-if="isCommentsShow" :postId="post.id"></comments>
+        <comments v-if="isCommentsShow" :postId="post.id" v-on:comments-change="onCommentNumberChange"></comments>
       </div>
     </div>
   </div>
@@ -47,12 +50,17 @@ export default {
   data () {
     return {
       users: null,
-      isCommentsShow: false
+      isCommentsShow: false,
+      commentNumber: null
     }
   },
   methods: {
     showComments () {
       this.isCommentsShow = !this.isCommentsShow
+    },
+    onCommentNumberChange (commentNum) {
+      this.commentNumber = commentNum
+      console.log(this.commentNumber)
     }
   }
 }
@@ -70,5 +78,9 @@ export default {
   display: inline-block;
   line-height: 1.1rem;
   font-size: 13px;
+}
+.comment-number {
+  font-size: 14px;
+  color:rgb(111, 116, 116);
 }
 </style>

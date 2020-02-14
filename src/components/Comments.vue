@@ -40,15 +40,23 @@ export default {
         .then(res => {
           this.comments.push(res.data)
           this.newComment.body = ''
+          this.onCommentsChange()
         })
         .catch(e => console.log(e))
+    },
+    onCommentsChange () {
+      let length = this.comments.length
+      this.$emit('comments-change', length)
     }
   },
   mounted () {
     commentService.getCommentsByPostId(this.postId).then(res => {
       this.comments = res.data
+      this.onCommentsChange()
     }).catch(e => console.log(e)
     )
+  },
+  computed: {
   }
 }
 </script>
