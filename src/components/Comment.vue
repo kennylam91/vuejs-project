@@ -28,15 +28,8 @@ export default {
   name: 'Comment',
   props: {
     comment: {
-      required: false,
-      default: {
-        postId: 1,
-        id: 1,
-        name: 'Anonymous',
-        email: 'anonymous@abc.com',
-        body:
-          'laudantium enim quasi est quidem magnam voluptate ipsam eos tempora quo necessitatibus dolor quam autem quasi reiciendis et nam sapiente accusantium'
-      }
+      type: Object,
+      required: true
     }
   },
   data () {

@@ -1,12 +1,12 @@
 <template>
   <div>
-    {{postId}}
-    <Comment />
+    <Comment v-for="comment in comments" :comment="comment" :key="comment.id" />
   </div>
 </template>
 
 <script>
 import Comment from './Comment'
+import commentService from '../services/CommentService'
 export default {
   name: 'Comments',
   components: {
@@ -20,7 +20,14 @@ export default {
   },
   data () {
     return {
+      comments: []
     }
+  },
+  mounted () {
+    commentService.getCommentsByPostId(this.postId).then(res => {
+      this.comments = res.data
+    }).catch(e => console.log(e)
+    )
   }
 }
 </script>
