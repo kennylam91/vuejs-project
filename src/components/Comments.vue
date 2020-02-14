@@ -5,9 +5,8 @@
       <img class="img-fluid smaller-rounded-avatar mr-2"
                   src="https://wpimg.wallstcn.com/57ed425a-c71e-4201-9428-68760c0537c4.jpg?imageView2/1/w/80/h/80"
                   alt="Avatar" />
-      {{$store.state.user.username}}
       <input id="commentInput" class="form-control form-control-sm" type="text" name=""
-        placeholder="Write comment" />
+        placeholder="Write comment" v-model="newComment.body" @keypress.enter="submitComment"/>
     </div>
   </div>
 </template>
@@ -28,11 +27,22 @@ export default {
   },
   data () {
     return {
-      comments: null
+      comments: null,
+      newComment: {
+        body: '',
+        email: this.$store.state.user.email
+      }
     }
   },
   methods: {
-
+    submitComment () {
+      commentService.createComment(this.postId, this.newComment)
+        .then(res => {
+          this.comments.push(res.data)
+          this.newComment.body = ''
+        })
+        .catch(e => console.log(e))
+    }
   },
   mounted () {
     commentService.getCommentsByPostId(this.postId).then(res => {

@@ -7,7 +7,8 @@ export const store = new Vuex.Store({
   state: {
     counter: 0,
     color: 'red',
-    user: null
+    user: null,
+    posts: null
   },
   mutations: {
     counterIncrement (state) {
@@ -15,6 +16,9 @@ export const store = new Vuex.Store({
     },
     setUser (state, user) {
       state.user = user
+    },
+    setPosts (state, posts) {
+      state.posts = posts
     }
   },
   getters: {

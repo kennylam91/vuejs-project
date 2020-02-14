@@ -100,7 +100,7 @@
       </div>
     </div>
     <div class="col-9 pl-0" id="actions">
-      <post v-for="post in posts" :key="post.id" :post ="post" :username="user.username"></post>
+      <post v-for="post in $store.state.posts" :key="post.id" :post ="post" :username="user.username"></post>
     </div>
   </div>
 </template>
@@ -120,8 +120,7 @@ export default {
   data () {
     return {
       user: null,
-      userId: this.$route.params.id,
-      posts: null
+      userId: this.$route.params.id
     }
   },
   mounted () {
@@ -135,7 +134,7 @@ export default {
       })
     postService.getPostsByUserId(this.userId)
       .then(res => {
-        this.posts = res.data
+        this.$store.commit('setPosts', res.data)
       })
       .catch(e => {
         console.log(e)
