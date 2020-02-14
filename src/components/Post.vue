@@ -11,23 +11,30 @@
           <span class="d-block font-weight-bold h5 font-italic">Iron Man</span>
         </span>
       </div>
-      <div class="card-body pb-0">
+      <hr/>
+      <div class="card-body py-0">
         <span class="font-weight-bold mb-2 d-block" v-text="post.title"></span>
         <span class="post" v-text="post.body"></span>
-        <div class>
-          <button class="btn btn-outline-info btn-sm m-3 border-0" type="button">Like</button>
-          <button class="btn btn-outline-danger btn-sm border-0" type="button">Hide</button>
+        <hr class="m-2"/>
+        <div class="px-3 mb-3">
+          <button class="btn btn-outline-info btn-sm border-0" type="button">Like</button>
+          <button class="btn btn-outline-danger btn-sm border-0" type="button">Comments</button>
         </div>
+        <comments :postId="post.id"></comments>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { UserService } from '../services/UserService'
-const userService = new UserService()
+// import { UserService } from '../services/UserService'
+import Comments from './Comments'
+// const userService = new UserService()
 export default {
   name: 'Post',
+  components: {
+    'comments': Comments
+  },
   props: {
     post: {
       required: true
@@ -37,14 +44,6 @@ export default {
     return {
       users: null
     }
-  },
-  mounted () {
-    return userService
-      .getUsers()
-      .then(res => {
-        this.users = res.data
-      })
-      .catch(e => console.log(e))
   }
 }
 </script>

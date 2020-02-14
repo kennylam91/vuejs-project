@@ -5,7 +5,7 @@
         <header class="p-3 border-bottom text-center">
           <span>About me</span>
         </header>
-        <div class="p-3">
+        <div class="p-3" v-if="user">
           <div class="text-center">
             <img
               class="img-fluid d-inline-block mb-3 avatar"
