@@ -8,7 +8,7 @@
           alt="Avatar"
         />
         <span class="d-inline-block">
-          <span class="d-block font-weight-bold h5 font-italic">Iron Man</span>
+          <span class="d-block font-weight-bold h5 font-italic">{{username}}</span>
         </span>
       </div>
       <hr/>
@@ -18,9 +18,9 @@
         <hr class="m-2"/>
         <div class="px-3 mb-3">
           <button class="btn btn-outline-info btn-sm border-0" type="button">Like</button>
-          <button class="btn btn-outline-danger btn-sm border-0" type="button">Comments</button>
+          <button class="btn btn-outline-danger btn-sm border-0" type="button" @click="showComments">Comments</button>
         </div>
-        <comments :postId="post.id"></comments>
+        <comments v-if="isCommentsShow" :postId="post.id"></comments>
       </div>
     </div>
   </div>
@@ -38,11 +38,21 @@ export default {
   props: {
     post: {
       required: true
+    },
+    username: {
+      required: true,
+      type: String
     }
   },
   data () {
     return {
-      users: null
+      users: null,
+      isCommentsShow: false
+    }
+  },
+  methods: {
+    showComments () {
+      this.isCommentsShow = !this.isCommentsShow
     }
   }
 }

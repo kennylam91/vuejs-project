@@ -100,7 +100,7 @@
       </div>
     </div>
     <div class="col-9 pl-0" id="actions">
-      <post v-for="post in posts" :key="post.id" :post ="post"></post>
+      <post v-for="post in posts" :key="post.id" :post ="post" :username="user.username"></post>
     </div>
   </div>
 </template>
@@ -128,7 +128,7 @@ export default {
     userService.getUserById(this.userId)
       .then(res => {
         this.user = res.data
-        console.log(this.user)
+        this.$store.commit('setUser', res.data)
       })
       .catch(e => {
         console.log(e)

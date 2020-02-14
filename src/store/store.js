@@ -6,11 +6,15 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     counter: 0,
-    color: 'red'
+    color: 'red',
+    user: null
   },
   mutations: {
     counterIncrement (state) {
       state.counter = state.counter + 1
+    },
+    setUser (state, user) {
+      state.user = user
     }
   },
   getters: {
